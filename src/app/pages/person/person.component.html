@@ -1,0 +1,68 @@
+<div *ngIf="!vm">
+    <p> Pessoa não existe!</p>
+</div>
+<div *ngIf="vm">
+    <h2>Edite a Pessoa!</h2>
+    <div>
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" [(ngModel)]="vm.nome">
+    </div>
+    <div>
+        <label for="sexo">sexo</label>
+        <input type="text" id="sexo" [(ngModel)]="vm.sexo">
+    </div>
+    <div>
+        <label for="dataNascimento">data nascimento</label>
+        <input type="text" id="dataNascimento" [(ngModel)]="vm.dataNascimento">
+    </div>
+    <div>
+        <label for="estadoCivil">Estado Civil</label>
+        <input type="text" id="estadoCivil" [(ngModel)]="vm.estadoCivil">
+    </div>
+    <!-- <ul> -->
+        <!-- <li *ngFor="endereco in vm.enderecos"> -->
+            <!-- <div> -->
+                <!-- <label for="address">Endereço</label> -->
+                <!-- Crie um método para 'stringificar' o endereço -->
+                <!-- <input type="text" id="address" [(ngModel)]="endereco"> -->
+                <!-- <input type="text" id="address" [value]="endereco"> -->
+            <!-- </div> -->
+            
+        <!-- </li> -->
+    <!-- </ul> -->
+    <div>
+        <h2>Edite os endereços</h2>
+        <div *ngFor="let endereco of vm.enderecos; let i = index">
+            <h3>Endereço {{ i + 1 }}</h3>
+            <div>
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" [(ngModel)]="vm.enderecos[i].cep">
+            </div>
+            <div>
+                <label for="endereco">Endereço</label>
+                <input type="text" id="endereco" [(ngModel)]="vm.enderecos[i].endereco">
+            </div>
+            <div>
+                <label for="numero">Número</label>
+                <input type="text" id="numero" [(ngModel)]="vm.enderecos[i].numero">
+            </div>
+            <div>
+                <label for="complemento">Complemento</label>
+                <input type="text" id="complemento" [(ngModel)]="vm.enderecos[i].complemento">
+            </div>
+            <div>
+                <label for="bairro">Bairro</label>
+                <input type="text" id="bairro" [(ngModel)]="vm.enderecos[i].bairro">
+            </div>
+            <div>
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" [(ngModel)]="vm.enderecos[i].cidade">
+            </div>
+            <div>
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" [(ngModel)]="vm.enderecos[i].estado">
+            </div>
+        </div>
+    </div>
+    <button (click)="saveChanges()">Save Changes</button>
+</div>

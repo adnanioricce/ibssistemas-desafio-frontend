@@ -1,0 +1,51 @@
+<div>
+    <h2>Add Record</h2>
+    <form (submit)="create()">
+      <div>
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" [(ngModel)]="vm.nome">
+      </div>
+      <div>
+        <label for="sexo">Sexo</label>
+        <input type="text" name="sexo" id="sexo" [(ngModel)]="vm.sexo">
+      </div>
+      <div>
+        <label for="dataNascimento">Data de Nascimento</label>
+        <input type="text" name="dataNascimento" id="dataNascimento" [(ngModel)]="vm.dataNascimento">
+      </div>
+      <div>
+        <label for="estadoCivil">Estado Civil</label>
+        <input type="text" name="estadoCivil" id="estadoCivil" [(ngModel)]="vm.estadoCivil">
+      </div>
+      <div *ngFor="let endereco of vm.enderecos; let i = index">
+        <h3>Endereço {{ i + 1 }}</h3>        
+        <div>
+            <label for="cep">CEP</label>
+            <input type="text" name="cep" id="cep" [(ngModel)]="vm.enderecos[i].cep">
+        </div>
+        <div>
+            <label for="estado">Estado</label>
+            <input type="text" name="estado" id="estado" [(ngModel)]="vm.enderecos[i].estado">
+        </div>
+        <div>
+            <label for="cidade">Cidade</label>
+            <input type="text" name="cidade" id="cidade" [(ngModel)]="vm.enderecos[i].cidade">
+        </div>
+        <div>
+            <label for="bairro">Bairro</label>
+            <input type="text" name="bairro" id="bairro" [(ngModel)]="vm.enderecos[i].bairro">
+        </div>        
+        <div>
+            <label for="endereco">Endereço</label>
+            <input type="text" name="endereco" id="endereco" [(ngModel)]="vm.enderecos[i].endereco">
+        </div>
+        <div>
+            <label for="numero">Numero</label>
+            <input type="text" name="numero" id="numero" [(ngModel)]="vm.enderecos[i].numero">
+        </div>
+      </div>
+      <button type="button" (click)="addAddress()">Adicionar Endereço</button>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  
