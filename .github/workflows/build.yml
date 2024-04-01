@@ -24,6 +24,7 @@ jobs:
       run: echo "::set-output name=name::$(echo $GITHUB_REF | sed 's/refs\/heads\///')"
           
     - name: Build the Docker image
+      id: image-build
       run: |
         IMAGE_TAG=$(echo "${{ steps.branch.outputs.name }}-$(date +'%Y%m%d%H%M%S')")
         docker build -f prod.Dockerfile -t $IMAGE_TAG .
@@ -31,7 +32,7 @@ jobs:
         
     - name: Push Docker image to Docker registry
       run: |
-        IMAGE_TAG="${{ steps.build.outputs.image_tag }}"
+        IMAGE_TAG="${{ steps.image-build.outputs.IMAGE_TAG }}"
         docker tag $IMAGE_TAG ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_TAG
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_TAG
         
