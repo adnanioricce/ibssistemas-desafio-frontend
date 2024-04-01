@@ -31,7 +31,7 @@ jobs:
         
     - name: Push Docker image to Docker registry
       run: |
-        IMAGE_TAG="${{ steps.build_and_push.outputs.image_tag }}"
+        IMAGE_TAG="${{ steps.build.outputs.image_tag }}"
         docker tag $IMAGE_TAG ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_TAG
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_TAG
         
