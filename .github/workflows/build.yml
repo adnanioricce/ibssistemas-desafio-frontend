@@ -15,5 +15,5 @@ jobs:
     steps:    
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ibssistemas-frontend:${GITHUB_REF##*/}-$(date +%s)
+      run: docker build . --file prod.Dockerfile --tag ibssistemas-frontend:${GITHUB_REF##*/}-$(date +%s)
     
