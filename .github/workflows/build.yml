@@ -19,14 +19,16 @@ jobs:
     - name: Login to Docker Hub
       run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
       
-    - name: Set branch name
-      id: branch
-      run: echo "::set-output name=name::$(echo $GITHUB_REF | sed 's/refs\/heads\///')"
+    #- name: Set branch name
+      #id: branch
+      #run: echo "::set-output name=name::$(echo '${{ github.ref }}' | awk -F'/' '{print $NF}')"
           
     - name: Build the Docker image
       id: image-build
-      run: |
-        IMAGE_TAG=$(echo "${{ steps.branch.outputs.name }}-$(date +'%Y%m%d%H%M%S')")
+      run: |        
+        IMAGE_TAG=$(echo "${{ github.ref }}" | awk -F'/' '{print $NF}')        
+        TIMESTAMP=$(date +'%Y%m%d%H%M%S')        
+        IMAGE_TAG="release-${{ github.event_name }}-${TIMESTAMP}"        
         docker build -f prod.Dockerfile -t $IMAGE_TAG .
         echo "::set-output name=image_tag::$IMAGE_TAG"
         
