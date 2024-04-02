@@ -1,0 +1,23 @@
+name: Auto Merge Pull Request
+
+on:
+  workflow_run:
+    workflows: ["Docker Image CI"]
+    types:
+      - completed
+
+jobs:
+  auto_merge:
+    runs-on: ubuntu-latest
+
+    if: github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Merge pull request
+        uses: pullreminders/merge-methods@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          method: merge
