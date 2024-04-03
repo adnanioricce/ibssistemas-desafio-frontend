@@ -1,27 +1,36 @@
-<h2>User Table</h2>
-<table border="1">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Sexo</th>
-      <th>Data de Nascimento</th>
-      <th>Estado Civil</th>
-      <th>Endereço</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let person of persons">
-      <td>{{ person.nome }}</td>
-      <td>{{ person.sexo }}</td>
-      <td>{{ person.dataNascimento }}</td>
-      <td>{{ person.estadoCivil }}</td>
-      <td>
-        <ul>
-          <li *ngFor="let address of person.enderecos">
-            CEP: {{ address.cep }}, Endereço: {{ address.endereco }}, Número: {{ address.numero }}, Complemento: {{ address.complemento }}, Bairro: {{ address.bairro }}, Estado: {{ address.estado }}, Cidade: {{ address.cidade }}
-          </li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container mt-5">  
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Sexo</th>
+          <th>Data de Nascimento</th>
+          <th>Estado Civil</th>
+          <th>Endereço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of persons">
+          <td>{{ person.nome }}</td>
+          <td>{{ person.sexo }}</td>
+          <td>{{ person.dataNascimento }}</td>
+          <td>{{ person.estadoCivil }}</td>
+          <td>
+            <ul class="list-unstyled">
+              <li *ngFor="let address of person.enderecos">
+                <p>CEP: {{ address.cep }}</p>
+                <p>Endereço: {{ address.endereco }}</p>
+                <p>Número: {{ address.numero }}</p>
+                <p>Complemento: {{ address.complemento }}</p>
+                <p>Bairro: {{ address.bairro }}</p>
+                <p>Estado: {{ address.estado }}</p>
+                <p>Cidade: {{ address.cidade }}</p>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

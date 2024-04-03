@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { PersonViewModel } from '../person/personVm.model'
 import { PersonsService } from '../../persons/persons.service'
 import { FormsModule } from '@angular/forms';
-
+import Swal from "sweetalert2";
 @Component({
   selector: 'app-person-create',
   standalone: true,
@@ -25,16 +25,24 @@ export class PersonCreateComponent implements OnInit {
   ngOnInit(): void {
     /** ? */
   }
-  async create(): Promise<void> {
-    console.log('dto:',this.vm.toDto())
-    return
+  async showBirthdayMessage(){
+    if(!this.vm.isBirthday){
+      await Swal.fire({
+        title: `Olá ${this.vm.nome}`
+        ,text: `Seja bem vindo!Parece que faltam ${this.vm.daysToNextBirthday} dias para seu próximo aniversário para seus ${this.vm.idade} virarem ${this.vm.idade + 1}`
+        ,icon: 'success'
+      })
+      return
+    }
+    
+  }
+  async create(): Promise<void> {    
     const person = await this.personsService.create(this.vm.toDto());
     person.subscribe(p => {
       this.router.navigate(['/persons',{ id: p.id }])
     })
   }
-  addAddress(){
-    //acho melhor não implementar isso.
+  addAddress(){    
     this.vm.enderecos.push({
       cep: ""      
       ,estado:""

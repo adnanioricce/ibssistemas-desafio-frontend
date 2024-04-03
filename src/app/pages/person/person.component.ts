@@ -39,6 +39,7 @@ export class PersonComponent implements OnInit {
         .catch(err => console.error(err))
     })
   }
+  
   saveChanges(): void {
     const dto = this.vm.toDto()
   }

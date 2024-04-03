@@ -16,15 +16,15 @@ export class PersonsService {
   constructor(private http:HttpClient,private auth:AuthService) { }
   async create(dto:PersonDto) : Promise<Observable<PersonDto>> {
     const jwt = this.auth.getJwt()    
-    if(!jwt){
+    // if(!jwt){
       return await this.http.post<PersonDto>(`${this.baseUrl}/persons`,dto)      
-    }
-    else {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${jwt}`);
-      return await this.http.post<PersonDto>(`${this.baseUrl}/persons`,dto,{
-        headers
-      })
-    }
+    // }
+    // else {
+    //   const headers = new HttpHeaders().set('Authorization', `Bearer ${jwt}`);
+    //   return await this.http.post<PersonDto>(`${this.baseUrl}/persons`,dto,{
+    //     headers
+    //   })
+    // }
   }
 
   async get(personId: string) : Promise<Observable<PersonDto>> {    

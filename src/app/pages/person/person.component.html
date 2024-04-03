@@ -1,68 +1,73 @@
-<div *ngIf="!vm">
-    <p> Pessoa não existe!</p>
+<div class="container mt-5" *ngIf="!vm">
+    <div class="alert alert-danger" role="alert">
+        Pessoa não existe!
+    </div>
 </div>
-<div *ngIf="vm">
-    <h2>Edite a Pessoa!</h2>
-    <div>
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" [(ngModel)]="vm.nome">
+
+<div class="container mt-5" *ngIf="vm">
+    <h2 class="mb-4">Edite a Pessoa</h2>
+
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" [(ngModel)]="vm.nome">
     </div>
-    <div>
-        <label for="sexo">sexo</label>
-        <input type="text" id="sexo" [(ngModel)]="vm.sexo">
+
+    <div class="mb-3">
+        <label for="sexo" class="form-label">Sexo</label>
+        <select class="form-select" id="sexo" [(ngModel)]="vm.sexo" name="sexo">
+            <option value="1">H</option>
+            <option value="2">M</option>
+        </select>
     </div>
-    <div>
-        <label for="dataNascimento">data nascimento</label>
-        <input type="text" id="dataNascimento" [(ngModel)]="vm.dataNascimento">
+
+    <div class="mb-3">
+        <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" [(ngModel)]="vm.dataNascimento">
     </div>
-    <div>
-        <label for="estadoCivil">Estado Civil</label>
-        <input type="text" id="estadoCivil" [(ngModel)]="vm.estadoCivil">
+
+    <div class="mb-3">
+        <label for="estadoCivil" class="form-label">Estado Civil</label>
+        <select class="form-select" id="estadoCivil" [(ngModel)]="vm.estadoCivil" name="estadoCivil">
+            <option value="1">Solteiro(a)</option>
+            <option value="2">Casado(a)</option>
+            <option value="3">Viúvo(a)</option>
+        </select>
     </div>
-    <!-- <ul> -->
-        <!-- <li *ngFor="endereco in vm.enderecos"> -->
-            <!-- <div> -->
-                <!-- <label for="address">Endereço</label> -->
-                <!-- Crie um método para 'stringificar' o endereço -->
-                <!-- <input type="text" id="address" [(ngModel)]="endereco"> -->
-                <!-- <input type="text" id="address" [value]="endereco"> -->
-            <!-- </div> -->
-            
-        <!-- </li> -->
-    <!-- </ul> -->
+
     <div>
-        <h2>Edite os endereços</h2>
-        <div *ngFor="let endereco of vm.enderecos; let i = index">
+        <h2 class="mb-3">Edite os Endereços</h2>
+        <div *ngFor="let endereco of vm.enderecos; let i = index" class="border p-3 mb-3">
             <h3>Endereço {{ i + 1 }}</h3>
-            <div>
-                <label for="cep">CEP</label>
-                <input type="text" id="cep" [(ngModel)]="vm.enderecos[i].cep">
+            <div class="mb-3">
+                <label for="cep" class="form-label">CEP</label>
+                <input type="text" class="form-control" id="cep" [(ngModel)]="vm.enderecos[i].cep">
             </div>
-            <div>
-                <label for="endereco">Endereço</label>
-                <input type="text" id="endereco" [(ngModel)]="vm.enderecos[i].endereco">
+            <div class="mb-3">
+                <label for="endereco" class="form-label">Endereço</label>
+                <input type="text" class="form-control" id="endereco" [(ngModel)]="vm.enderecos[i].endereco">
             </div>
-            <div>
-                <label for="numero">Número</label>
-                <input type="text" id="numero" [(ngModel)]="vm.enderecos[i].numero">
+            <div class="mb-3">
+                <label for="numero" class="form-label">Número</label>
+                <input type="text" class="form-control" id="numero" [(ngModel)]="vm.enderecos[i].numero">
             </div>
-            <div>
-                <label for="complemento">Complemento</label>
-                <input type="text" id="complemento" [(ngModel)]="vm.enderecos[i].complemento">
+            <div class="mb-3">
+                <label for="complemento" class="form-label">Complemento</label>
+                <input type="text" class="form-control" id="complemento" [(ngModel)]="vm.enderecos[i].complemento">
             </div>
-            <div>
-                <label for="bairro">Bairro</label>
-                <input type="text" id="bairro" [(ngModel)]="vm.enderecos[i].bairro">
+            <div class="mb-3">
+                <label for="bairro" class="form-label">Bairro</label>
+                <input type="text" class="form-control" id="bairro" [(ngModel)]="vm.enderecos[i].bairro">
             </div>
-            <div>
-                <label for="cidade">Cidade</label>
-                <input type="text" id="cidade" [(ngModel)]="vm.enderecos[i].cidade">
+            <div class="mb-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="cidade" [(ngModel)]="vm.enderecos[i].cidade">
             </div>
-            <div>
-                <label for="estado">Estado</label>
-                <input type="text" id="estado" [(ngModel)]="vm.enderecos[i].estado">
+            <div class="mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <input type="text" class="form-control" id="estado" [(ngModel)]="vm.enderecos[i].estado">
             </div>
         </div>
     </div>
-    <button (click)="saveChanges()">Save Changes</button>
+
+    <button class="btn btn-primary" (click)="saveChanges()">Salvar Alterações</button>
 </div>
