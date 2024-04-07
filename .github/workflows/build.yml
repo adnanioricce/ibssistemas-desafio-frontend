@@ -25,10 +25,8 @@ jobs:
           
     - name: Build the Docker image
       id: image-build
-      run: |        
-        IMAGE_TAG=$(echo "${{ github.ref }}" | awk -F'/' '{print $NF}')        
-        TIMESTAMP=$(date +'%Y%m%d%H%M%S')        
-        IMAGE_TAG="release-${{ github.event_name }}-${TIMESTAMP}"        
+      run: |                
+        IMAGE_TAG="latest"        
         docker build -f prod.Dockerfile -t $IMAGE_TAG .
         echo "::set-output name=image_tag::$IMAGE_TAG"
         
@@ -37,12 +35,4 @@ jobs:
         IMAGE_TAG="${{ steps.image-build.outputs.IMAGE_TAG }}"
         docker tag $IMAGE_TAG ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_TAG
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_TAG
-        
-    #- name: Merge into develop
-    #  if: github.ref == 'refs/heads/main'
-    #  uses: pullreminders/merge-methods@v2
-    #  with:
-    #    github-token: ${{ secrets.GITHUB_TOKEN }}
-    #    method: merge
-    #    branch: develop
     
