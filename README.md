@@ -1,27 +1,32 @@
-# PersonsFrontend
+# Desafio IBS sistemas - frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
+O projeto nesse repositório trata-se de um desafio de contração da IBS sistemas. O mesmo contém o projeto frontend que se utiliza da API
 
-## Development server
+## Executando o projeto ...
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Localmente
 
-## Code scaffolding
+#### Servidor de dev
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+execute `ng serve` na raiz do projeto, depois navegue até  `http://localhost:4200/`.
 
-## Build
+#### Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Execute `ng build` para realizar a compilação e minificação do projeto. os artefatos do build estarão no diretório `dist/`.
 
-## Running unit tests
+#### Rodando os testes de unidade
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Execute `ng test` para executar os testes de unidade com [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+#### rodando os testes de ponta a ponta
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Execute `ng e2e` para executar os testes e2e. Decidi escolher o [playwright](https://playwright.dev/) aqui.
 
-## Further help
+### com docker
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+$ docker build -f prod.Dockerfile -t sua-tag:latest
+$ docker run -d --name ibs-frontend -p 8184:80 -e API_URL=... sua-tag:latest
+```
+
+
