@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from '../storage/cookie.service';
 // import {} from "http";
-import { settings } from "../settings";
+import { environment  } from "../../environments/environment"
+import { ValidationError } from '../shared/models';
 export type LoginRequest = {
   username: string
   password: string
@@ -18,26 +19,34 @@ export class AuthService {
   constructor(private http: HttpClient
     ,private cookieService: CookieService) { }
 
-  async login(req:LoginRequest){
-    
-    if((await this.validate(req)).length === 0){
-      const bodyJson = JSON.stringify(req)
-      await this.http.post<LoginResponse>(`${settings.API_URL}/auth/login`,bodyJson)
-        .subscribe(response => {
-          sessionStorage.setItem('auth',response.access_token)
-        })
-    }
+  async login(req:LoginRequest): Promise<Observable<LoginResponse>> {
+    console.log('login request:',req)
+    const bodyJson = JSON.stringify(req)
+    const url = `${environment.API_URL}/auth/login`
+    console.log("sending request to url ",url, " with body -> ",bodyJson)
+    const response = await this.http.post<LoginResponse>(url,bodyJson)    
+    response.subscribe(response => {
+      this.cookieService.setCookie('auth',response.access_token,1)
+    })
+    return response      
   }
   isAuthenticated(): boolean {
-    return !!this.cookieService.getCookie('jwt'); // Check if token exists in cookie
+    return !!this.cookieService.getCookie('auth'); // Check if token exists in cookie
   }
   logout(): void {
-    this.cookieService.deleteCookie('jwt'); // Delete token from cookie
+    this.cookieService.deleteCookie('auth'); // Delete token from cookie
   }
   getJwt(){
-    return this.cookieService.getCookie('jwt')
+    return this.cookieService.getCookie('auth')
   }
-  private async validate(req:LoginRequest){
-    return [];
+  private validate(req:LoginRequest): ValidationError[] {
+    const errors = []
+    if(!req.username){
+      errors.push({field: 'username',message: 'username is required'})
+    }
+    if(!req.password){
+      errors.push({field: 'password',message: 'password is required'})
+    }
+    return errors;
   }
 }

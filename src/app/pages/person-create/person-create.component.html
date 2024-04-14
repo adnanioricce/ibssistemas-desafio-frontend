@@ -21,7 +21,7 @@
       <h3>Endereço {{ i + 1 }}</h3>
       <div class="mb-3">
         <label for="cep" class="form-label">CEP</label>
-        <input type="text" class="form-control" name="cep" id="cep" [(ngModel)]="vm.enderecos[i].cep">
+        <input type="text" class="form-control" name="cep" id="cep" [(ngModel)]="vm.enderecos[i].cep" (ngModelChange)="onCepChange(vm.enderecos[i].cep,i)">
       </div>
       <div class="mb-3">
         <label for="estado" class="form-label">Estado</label>

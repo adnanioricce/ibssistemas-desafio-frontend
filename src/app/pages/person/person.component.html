@@ -14,23 +14,20 @@
 
     <div class="mb-3">
         <label for="sexo" class="form-label">Sexo</label>
-        <select class="form-select" id="sexo" [(ngModel)]="vm.sexo" name="sexo">
-            <option value="1">H</option>
-            <option value="2">M</option>
+        <select class="form-select" id="sexo"  [(ngModel)]="vm.sexo" name="sexo">
+            <option *ngFor="let op of sexos" [ngValue]="op.value" >{{ op.name }}</option>
         </select>
     </div>
 
     <div class="mb-3">
         <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-        <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" [(ngModel)]="vm.dataNascimento">
+        <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" [(ngModel)]="formattedDate" (ngModelChange)="dateUpdate($event)" >
     </div>
 
     <div class="mb-3">
         <label for="estadoCivil" class="form-label">Estado Civil</label>
         <select class="form-select" id="estadoCivil" [(ngModel)]="vm.estadoCivil" name="estadoCivil">
-            <option value="1">Solteiro(a)</option>
-            <option value="2">Casado(a)</option>
-            <option value="3">Viúvo(a)</option>
+            <option *ngFor="let op of estadosCivis" [ngValue]="op.value" >{{ op.name }}(a)</option>            
         </select>
     </div>
 

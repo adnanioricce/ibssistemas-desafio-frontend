@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('http://localhost:4200/');
+  await page.getByRole('link', { name: 'Persons' }).click();
+  await page.goto('http://localhost:4200/persons/66077008dd28966968bbdb38');
+  await page.getByLabel('Nome').click();
+  await page.getByLabel('Nome').fill('João Batista');
+  await page.getByLabel('Nome').press('Tab');
+  await page.getByLabel('Sexo').selectOption('1');
+  await page.getByLabel('Data de Nascimento').fill('2004-01-01');
+  await page.getByLabel('Data de Nascimento').press('Tab');
+  await page.getByLabel('Estado Civil').selectOption('1');
+  await page.getByLabel('CEP').click();
+  await page.getByLabel('CEP').press('Control+a');
+  await page.getByLabel('CEP').fill('39402-878');
+  await page.getByLabel('Endereço').click();
+  await page.getByLabel('Endereço').press('Control+a');
+  await page.getByLabel('Endereço').fill('Rua Quatro');
+  await page.getByLabel('Bairro').click();
+  await page.getByLabel('Bairro').press('Control+a');
+  await page.getByLabel('Bairro').fill('Vila Anália');
+  await page.getByLabel('Cidade').click();
+  await page.getByLabel('Cidade').press('Control+a');
+  await page.getByLabel('Cidade').fill('Montes Claros');
+  await page.getByLabel('Estado', { exact: true }).click();
+  await page.getByLabel('Estado', { exact: true }).press('Control+a');
+  await page.getByLabel('Estado', { exact: true }).fill('MG');
+  await page.getByRole('button', { name: 'Salvar Alterações' }).click();
+});

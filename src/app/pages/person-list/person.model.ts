@@ -15,15 +15,15 @@ export type AddressDto = {
 }
 
 export type PersonDto = {    
-  id: string
+  _id: string
 
   nome: string
   
-  sexo: string
+  sexo: number
 
   dataNascimento: Date
 
-  estadoCivil: string
+  estadoCivil: number
 
   enderecos: AddressDto[]
 }

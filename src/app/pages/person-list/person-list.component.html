@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let person of persons">
+        <tr *ngFor="let person of persons" [routerLink]="['/persons',person._id]" class="clickable-row">
           <td>{{ person.nome }}</td>
           <td>{{ person.sexo }}</td>
           <td>{{ person.dataNascimento }}</td>
@@ -19,13 +19,7 @@
           <td>
             <ul class="list-unstyled">
               <li *ngFor="let address of person.enderecos">
-                <p>CEP: {{ address.cep }}</p>
-                <p>Endereço: {{ address.endereco }}</p>
-                <p>Número: {{ address.numero }}</p>
-                <p>Complemento: {{ address.complemento }}</p>
-                <p>Bairro: {{ address.bairro }}</p>
-                <p>Estado: {{ address.estado }}</p>
-                <p>Cidade: {{ address.cidade }}</p>
+                <p>{{ toAddressString(address) }}</p>                
               </li>
             </ul>
           </td>
